@@ -1,0 +1,6 @@
+encrypt:
+  key-store:
+    location: classpath:server.jks
+    alias: config-server
+    password: just-do-it@everything.com # encrypt.key-store.password为第一次输入的口令
+    secret: just-do-it@everything.com # encrypt.key-store.secret为<Config-Server>的密钥口令的密钥口令

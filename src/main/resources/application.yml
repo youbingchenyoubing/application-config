@@ -1,0 +1,62 @@
+spring:
+  profiles:
+    active:
+      - dev
+  security:
+    user:
+      name: just-do-it
+      password: just-do-it@everything.com
+  application:
+    name: application-config
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/youbingchenyoubing/config-registry
+          search-paths: ## 仓库路径下相对搜索位置，可配置多个
+            - just-do-it
+          username: youbingchenyoubing@163.com
+          password: '{cipher}AQCpRAu5zEy9F468seqq3Q/hh6nGuzKBzfgx+Ki2RUmZW4gZT4iWOB4oYb30DwLl2Oc9m1O2fdNPuqVql/qWolWrZcUybpjxRvyfqV4lfysXimiwRJNmTG4OOQB+3M6eFVM9MSZyFANY9YvjXgYVShlNJsdrQdcEf12tcgZvpztJDFblKLxZUbRiuABdgAS9bsWjYEq/rVVgA9nsKWT3G9T/GQuasSE93B0EAB4IcCYu1uMbvsYjECb23cDoHqo8LMjiKhYI/fg2Xooaox0FlsQapEcvnrVR+qf2tPPxYYyhpbTSvO+UeNE5Ws9tz9/DdRqfSKCuSc5IWo8BfZ6aQGQ+S9yPHXe9H9wVt7cSEdXYgPxh5XC41zxiyFJjJR0I6I8='
+          clone-on-start: true # 这样做的好处在于，当Git连接信息有误时，可以马上发现。
+      label: master  # 分支
+
+
+
+server:
+  port: 8762
+
+
+
+
+info:
+  软件著作权: just-do-it
+  著作登记号: just-do-it-for-everything
+  关于我们:  https://github.com/youbingchenyoubing
+
+center:
+  username: just-do-it
+  password: '{cipher}AQDbWe1bKJw/N5WROvBLtOJIQ/tjuhFkLsu952pldAgf/BMRgpw2Xu+j/ye5RVArPrV7ZgCeBHNuPv1vM29pXDd2hdH1jPZ68KxXqlA26eVDff/PqNCuWcth710s5LsSBBsyIYyhiIrj3w/EiOaEzqVypcELOOzzW6L3ReNXIf/8mr21FJ3hgnzSyAlKLAIzAwf2wOBQUf6yro7rTKIlPXXQOyoRib7dTBd132qUuzD/D0vZrRAZBHqLGxV6bqReFog7oL2LKNQDspbb0Cx+KAzDoCadRTnh8pHx/WAPbjV2vjF3Lly1iWcCjo7viEU/HfES13hKmYzChVfMCP8Mdiqur7plPI3e/6SE4PXBUJqGec84g38lcZWMSENuniLXn5sx7Z6ESUd9YAYYnjhcdHac'
+---
+spring:
+  profiles:
+    dev
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://${center.username}:${center.password}@localhost:8761/eureka/
+  instance:
+    instance-id: ${spring.application.name}:${spring.cloud.client.ipAddress}:${server.port}
+
+---
+spring:
+  profile:
+    docker # prod
+
+eureka:
+  client:
+    service-url:
+      defaultZone:http://${center.username}:${center.password}@application-center:8761/eureka/
+  instance:
+    instance-id:  ${spring.application.name}:${spring.cloud.client.ipAddress}:${server.port}
+
+
