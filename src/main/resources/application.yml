@@ -5,7 +5,7 @@ spring:
   security:
     user:
       name: just-do-it
-      password: just-do-it@everything.com
+      password: '{cipher}AQDbWe1bKJw/N5WROvBLtOJIQ/tjuhFkLsu952pldAgf/BMRgpw2Xu+j/ye5RVArPrV7ZgCeBHNuPv1vM29pXDd2hdH1jPZ68KxXqlA26eVDff/PqNCuWcth710s5LsSBBsyIYyhiIrj3w/EiOaEzqVypcELOOzzW6L3ReNXIf/8mr21FJ3hgnzSyAlKLAIzAwf2wOBQUf6yro7rTKIlPXXQOyoRib7dTBd132qUuzD/D0vZrRAZBHqLGxV6bqReFog7oL2LKNQDspbb0Cx+KAzDoCadRTnh8pHx/WAPbjV2vjF3Lly1iWcCjo7viEU/HfES13hKmYzChVfMCP8Mdiqur7plPI3e/6SE4PXBUJqGec84g38lcZWMSENuniLXn5sx7Z6ESUd9YAYYnjhcdHac'
   application:
     name: application-config
   cloud:
@@ -36,6 +36,16 @@ info:
 center:
   username: just-do-it
   password: '{cipher}AQDbWe1bKJw/N5WROvBLtOJIQ/tjuhFkLsu952pldAgf/BMRgpw2Xu+j/ye5RVArPrV7ZgCeBHNuPv1vM29pXDd2hdH1jPZ68KxXqlA26eVDff/PqNCuWcth710s5LsSBBsyIYyhiIrj3w/EiOaEzqVypcELOOzzW6L3ReNXIf/8mr21FJ3hgnzSyAlKLAIzAwf2wOBQUf6yro7rTKIlPXXQOyoRib7dTBd132qUuzD/D0vZrRAZBHqLGxV6bqReFog7oL2LKNQDspbb0Cx+KAzDoCadRTnh8pHx/WAPbjV2vjF3Lly1iWcCjo7viEU/HfES13hKmYzChVfMCP8Mdiqur7plPI3e/6SE4PXBUJqGec84g38lcZWMSENuniLXn5sx7Z6ESUd9YAYYnjhcdHac'
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: ALWAYS
+
 ---
 spring:
   profiles:
@@ -46,7 +56,8 @@ eureka:
       defaultZone: http://${center.username}:${center.password}@localhost:8761/eureka/
   instance:
     instance-id: ${spring.application.name}:${spring.cloud.client.ipAddress}:${server.port}
-
+    leaseRenewalIntervalInSeconds: 10
+    health-check-url-path: /actuator/health
 ---
 spring:
   profile:
@@ -58,5 +69,5 @@ eureka:
       defaultZone:http://${center.username}:${center.password}@application-center:8761/eureka/
   instance:
     instance-id:  ${spring.application.name}:${spring.cloud.client.ipAddress}:${server.port}
-
-
+    leaseRenewalIntervalInSeconds: 10
+    health-check-url-path: /actuator/health
