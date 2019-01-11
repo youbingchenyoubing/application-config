@@ -55,7 +55,7 @@ eureka:
     serviceUrl:
       defaultZone: http://${center.username}:${center.password}@localhost:8761/eureka/
   instance:
-    instance-id: ${spring.application.name}:${spring.cloud.client.ipAddress}:${server.port}
+    instance-id: ${spring.application.name}:${server.port}
     leaseRenewalIntervalInSeconds: 10
     health-check-url-path: /actuator/health
 ---
@@ -68,6 +68,6 @@ eureka:
     service-url:
       defaultZone:http://${center.username}:${center.password}@application-center:8761/eureka/
   instance:
-    instance-id:  ${spring.application.name}:${spring.cloud.client.ipAddress}:${server.port}
+    instance-id:  ${spring.application.name}:${server.port}
     leaseRenewalIntervalInSeconds: 10
     health-check-url-path: /actuator/health
