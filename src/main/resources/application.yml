@@ -52,7 +52,7 @@ spring:
     dev
 eureka:
   client:
-    serviceUrl:
+    service-url:
       defaultZone: http://${center.username}:${center.password}@localhost:8761/eureka/
   instance:
     instance-id: ${spring.application.name}:${server.port}
@@ -66,7 +66,7 @@ spring:
 eureka:
   client:
     service-url:
-      defaultZone:http://${center.username}:${center.password}@application-center:8761/eureka/
+      defaultZone: http://${center.username}:${center.password}@application-center:8761/eureka/
   instance:
     instance-id:  ${spring.application.name}:${server.port}
     leaseRenewalIntervalInSeconds: 10

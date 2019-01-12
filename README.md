@@ -12,7 +12,7 @@
 
 [spring-cloud-starter is missing spring-security-rsa causing spring-cloud-client to fail to do local decryption](https://github.com/spring-cloud/spring-cloud-config/issues/84)
 
-[](https://www.oschina.net/question/3877992_2281476)
+[spring cloud config server 客户端权限验证配置401](https://www.oschina.net/question/3877992_2281476)
 
 [深入理解SpringCloud之引导程序应用上下文](https://www.cnblogs.com/niechen/p/8968204.html#_label0)
 
@@ -26,6 +26,7 @@
 
 [docker基本命令](http://www.runoob.com/docker/docker-run-command.html)
 
+[Docker容器访问宿主机网络](https://jingsam.github.io/2018/10/16/host-in-docker.html)
 
 
 本地配置文件内容加密
@@ -42,5 +43,5 @@ zation,L=City,S=State,C=US" -keypass just-do-it@everything.com -keystore server.
 ```
 
 ```shell
-docker run -p 8762:8762 -d -e SPRING_PROFILE_ACTIVE="dev"  registry.cn-hangzhou.aliyuncs.com/just-do-it/common-config:1.0.0
+docker run -p 8762:8762 -d --network host -e SPRING_PROFILE_ACTIVE="dev"  registry.cn-hangzhou.aliyuncs.com/just-do-it/common-config:1.0.0
 ```
